@@ -1,0 +1,55 @@
+{
+ "creation": "2020-06-03 15:43:54.307215",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "administrator_username",
+  "administrator_password",
+  "baseurl"
+ ],
+ "fields": [
+  {
+   "fieldname": "administrator_password",
+   "fieldtype": "Password",
+   "in_list_view": 1,
+   "label": "Administrator Password",
+   "reqd": 1
+  },
+  {
+   "fieldname": "administrator_username",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Administrator Username",
+   "reqd": 1
+  },
+  {
+   "fieldname": "baseurl",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Baseurl",
+   "reqd": 1
+  }
+ ],
+ "issingle": 1,
+ "modified": "2020-06-03 16:48:10.502951",
+ "modified_by": "Administrator",
+ "module": "Smarterp",
+ "name": "Settings Smarterp",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
