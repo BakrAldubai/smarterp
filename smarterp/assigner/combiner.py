@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import datetime
 import csv
 import json
@@ -96,15 +97,24 @@ class Combiner:
 
         return samples
 
-    def set_assignments(self, assignments, contacts):
+    def set_assignments(self, issues, todos, contacts):
+        
+        assignments = pd.merge(todos.add_prefix("todo_"),issues, left_on="todo_reference_name", right_on="name", how="left")       
+        
         assignments = self.samples_enrich(assignments)
         self.create_domain_mappings(contacts)
         assignments = self.samples_map_domains(assignments)
         self.assignments = assignments
         employees = assignments["todo_owner"].unique()
         self.todo_owners = employees[~pd.isnull(employees)].tolist() #Removes nans
+    
 
     def set_timesheets(self, timesheets, employees, projects, customers):
+
+        #Add customer from the issues
+        print("Combiner: Adding customer from issues.")
+        assignments = self.assignments.rename(columns={"name": "issue"})
+        timesheets = pd.merge(timesheets, assignments.loc[:,["issue","customer"]], on="issue", how="left")
 
         #Add Employee id (user_id)
         print("Combiner: Adding user_id to Assignments.")
@@ -114,13 +124,17 @@ class Combiner:
         #Add Project
         print("Combiner: Adding project to Assignments.")
         projects = projects.rename(columns={"name" : "project"})
-        timesheets = pd.merge(timesheets,projects,on="project",how="left")
+        timesheets = pd.merge(timesheets,projects,on="project",how="left", suffixes=("_from_issues","_from_projects"))
 
         #Add Customer
         print("Combiner: Adding customer to Assignments.")
         timesheets = timesheets.drop("customer_name",axis=1)
         customers = customers.rename(columns={"name" : "customer"})
+        timesheets["customer"] = np.where((timesheets["customer_from_issues"].isnull()),timesheets["customer_from_projects"],timesheets["customer_from_issues"])
+        timesheets = timesheets.drop("customer_from_issues", axis=1)
+        timesheets = timesheets.drop("customer_from_projects", axis=1)
         timesheets = pd.merge(timesheets,customers, on="customer", how="left")
+       
 
         #Basic transformation
         timesheets["start_date"] = pd.to_datetime(timesheets["start_date"])

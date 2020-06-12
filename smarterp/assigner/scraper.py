@@ -3,12 +3,11 @@ import pandas as pd
 import datetime
 import csv
 
-from frappe.utils import get_url
-
 class Scraper:
     def __init__(self, path):
         self.session = None
-        self.assignments = None
+        self.issues = None
+        self.todos = None
         self.contacts = None
         self.timesheets = None
         self.customers = None
@@ -20,8 +19,6 @@ class Scraper:
         self.url = None
 
     def auth(self,username,password):
-        print(username)
-        print(password)
         #Input Adminpassword
         if(password == None):
             username = input("Enter Administrator Username:")
@@ -44,38 +41,38 @@ class Scraper:
         self.url = baseurl
         self.session = self.auth(username, password)
         
-        #Assignments
+        #Issues
         issues = self.getIssueList()
+        self.issues = pd.DataFrame.from_records(issues)
+
+        #Todos
         todos = self.getTodoList()
-        assignments = self.assign(issues, todos)
-        self.assignments = pd.DataFrame.from_records(assignments)
+        self.todos = pd.DataFrame.from_records(todos)
 
         #Contacts
         contacts, keys = self.getContacts()
         self.contacts = pd.DataFrame(contacts, columns=keys)
-        #df_contacts.to_csv(filename + "_contacts.csv", sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
 
         #Timesheets
         timesheets = self.getTimesheets()
         self.timesheets = pd.DataFrame.from_records(timesheets)
-        #df_tsl.to_csv(filename + "_timesheets.csv", sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
+
 
         #Customers
         customers = self.getCustomerList()
         self.customers = pd.DataFrame.from_records(customers)
-        #df_csl.to_csv(filename + '_customers.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
 
         #Projects
         projects = self.getProjectList()
         self.projects = pd.DataFrame.from_records(projects)
-        #df_psl.to_csv(filename + '_projects.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
 
         #Employees
         employees = self.getEmployeesList()
         self.employees = pd.DataFrame.from_records(employees)
 
     def save(self):
-        self.assignments.to_csv(self.filename_prefix + '_assignments.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
+        self.issues.to_csv(self.filename_prefix + '_issues.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
+        self.todos.to_csv(self.filename_prefix + '_todos.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
         self.contacts.to_csv(self.filename_prefix + '_contacts.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
         self.timesheets.to_csv(self.filename_prefix + '_timesheets.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
         self.customers.to_csv(self.filename_prefix + '_customers.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
@@ -83,7 +80,8 @@ class Scraper:
         self.employees.to_csv(self.filename_prefix + '_employees.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"', index=False)
 
     def load(self):
-        self.assignments = pd.read_csv(self.filename_prefix + '_assignments.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"')
+        self.issues = pd.read_csv(self.filename_prefix + '_issues.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"')
+        self.todos = pd.read_csv(self.filename_prefix + '_todos.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"')
         self.contacts = pd.read_csv(self.filename_prefix + '_contacts.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"')
         self.timesheets = pd.read_csv(self.filename_prefix + '_timesheets.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"')
         self.customers = pd.read_csv(self.filename_prefix + '_customers.csv', sep=";", quoting=csv.QUOTE_ALL, quotechar='"')
@@ -110,13 +108,12 @@ class Scraper:
         assigned = []
         for todo in todos:
             for issue in issues:
-                assignment = issue
+                assignment = issue.copy()
                 if(todo["reference_name"] == issue["name"]):
                     for key, value in todo.items():
                         assignment["todo_" + key] = value
                     assigned.append(assignment)
-
-        print("Assigned Issue Count: " + str(len(assigned)))
+                    break
         return assigned
 
     def getContacts(self):
@@ -184,6 +181,7 @@ class Scraper:
             ts["employee_name"] =  data["employee_name"] if "employee_name" in data else None
             ts["start_date"] = data["start_date"]
             ts["total_hours"] = data["total_hours"]
+            ts["total_billed_hours"] = data["total_billed_hours"]
             if("issue" in data):
                 ts["issue"] = data["issue"]
             else:

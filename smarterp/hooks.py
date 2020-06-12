@@ -26,7 +26,10 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Issue" : "public/js/issue.js"}
+doctype_js = {
+    "Issue" : "public/js/issue.js",
+    "Settings Smarterp" : "public/js/settings.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -94,9 +97,9 @@ scheduler_events = {
 # 	"all": [
 # 		"smarterp.tasks.all"
 # 	],
-# 	"daily": [
-# 		"smarterp.tasks.daily"
-# 	],
+ 	"daily": [
+ 		"smarterp.assigner.autoassign.prepare_assigner"
+ 	],
 # 	"hourly": [
 # 		"smarterp.tasks.hourly"
 # 	],
@@ -108,7 +111,7 @@ scheduler_events = {
 # 	]
     "cron": {
         "0 5 * * *": [
-            "smarterp.autoassign.prepare_assigner"
+            "smarterp.assigner.autoassign.prepare_assigner"
         ]
     }
  }

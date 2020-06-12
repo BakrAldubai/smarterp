@@ -5,17 +5,7 @@ frappe.ui.form.on('Issue', {
 	refresh: function (frm) {
 		if (!frm.is_new()) {
 			frm.add_custom_button('Assign', function() {frm.trigger('autoassign')});
-			frm.add_custom_button('Train Assigner', function() {frm.trigger('train')});
 		}
-	},
-	train: function(frm) {
-		frappe.call({
-			method: "smarterp.assigner.autoassign.prepare_assigner",
-			args: {},
-			callback: function(response_json){
-				frappe.msgprint(response_json)
-			}
-		});
 	},
 	autoassign: function(frm){
 		if (frm.is_new()) {
@@ -127,6 +117,7 @@ frappe.ui.form.on('Issue', {
 						},
 						options: options
 					});
+					//console.log(sorted)
 					assignment.$wrapper.find('.modal-dialog').css("width","30%");
 					assignment.show();
 				})

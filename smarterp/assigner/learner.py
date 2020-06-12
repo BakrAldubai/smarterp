@@ -112,13 +112,13 @@ class Learner:
         #Transform
         X = df[features]
         y = df[target]
-        X = self.le_features(X) #Encode only test set
+        X = self.le_features(X)
         y = self.encode_target(y)
 
         #Cross Val
         clf = make_pipeline(RandomForestClassifier(n_estimators=400))
         cv = KFold(n_splits=10, random_state=123, shuffle=True)
-        accs = cross_val_score(self.models["rf"], X, y, scoring="accuracy", cv=cv)
+        accs = cross_val_score(clf, X, y, scoring="accuracy", cv=cv)
         print(accs)
         print(np.mean(accs))
 
