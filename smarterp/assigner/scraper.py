@@ -13,7 +13,7 @@ class Scraper:
         self.customers = None
         self.projects = None
         self.employees = None
-        self.filename_prefix = path + datetime.datetime.now().strftime("%d.%m.%Y")
+        self.filename_prefix = path #+ datetime.datetime.now().strftime("%d.%m.%Y")
 
         
         self.url = None
