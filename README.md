@@ -25,8 +25,7 @@ Just as any other frappe app:
 
 <code>
   bench get-app [this_repo_link]  
-</code>
-<code>
+  
   bench install-app smarterp [site-name]
 </code>
 
