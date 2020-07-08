@@ -24,7 +24,7 @@ The packages that are installed with this frappe app as per requirement are skle
 Just as any other frappe app:
 
 <code>
-  bench get-app [this_repo_link] \\
+  bench get-app [this_repo_link] \n
   bench install-app smarterp [site-name]
 </code>
 
