@@ -106,6 +106,7 @@ def get_probabilities(data):
 def prepare_assigner(username = None, pwd = None, baseurl = None, site = None):
     print("Preparing Assigner")
     try:
+        
         aa = AutoAssigner(site)
         print("Initiate scraping.")
         aa.scrape(username, pwd, baseurl)
@@ -113,6 +114,14 @@ def prepare_assigner(username = None, pwd = None, baseurl = None, site = None):
         aa.combine()
         print("Initiate training.")
         aa.train()
+
+        #Set training date
+        doc = frappe.get_doc("Settings Smarterp")
+        doc.last_training = frappe.utils.now()
+        doc.save(ignore_permissions=True)
+        doc.notify_update()
+        frappe.publish_realtime(event="eval_js", message='alert("Model trained.")', user=frappe.session.user)
+
         return "Model is trained"
 
     except Exception as e:

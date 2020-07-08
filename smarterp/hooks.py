@@ -94,24 +94,12 @@ doctype_js = {
 # ---------------
 
 scheduler_events = {
-# 	"all": [
-# 		"smarterp.tasks.all"
-# 	],
  	"daily": [
- 		"smarterp.assigner.autoassign.prepare_assigner"
+ 		"smarterp.assigner.autoassign.prepare_assigner_as_job"
  	],
-# 	"hourly": [
-# 		"smarterp.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"smarterp.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"smarterp.tasks.monthly"
-# 	]
     "cron": {
         "0 5 * * *": [
-            "smarterp.assigner.autoassign.prepare_assigner"
+            "smarterp.assigner.autoassign.prepare_assigner_as_job"
         ]
     }
  }
