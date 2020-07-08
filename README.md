@@ -39,6 +39,7 @@ Just as any other frappe app:
 6. Enter the base url of your site (without trailing slash)
 7. Click "Train Assigner"
 
+![alt text](https://github.com/canlann/smarterp/blob/master/readme-settings.png)
 
 ## Contact
 marius.widmann@gmail.com
