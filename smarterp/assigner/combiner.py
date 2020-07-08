@@ -14,6 +14,9 @@ class Combiner:
 
         self.path = path
 
+    """
+    Helper function that extracts the domain part from emails
+    """
     def extract_domain(self,email):
         mail_split = email.split("@")
         if(len(mail_split) > 1):
@@ -21,6 +24,10 @@ class Combiner:
         else:
             return email
 
+    """
+    Once the combiner is loaded or after the set_*-methods have been run, this can be used, to add
+    features to a sample dataframe. It uses the base data from the issues and enriches it with simple to calculate features.
+    """
     def samples_enrich(self, samples):        
         #Extract customer's domain from raised_by field
         samples.loc[:,"domain"] = samples.loc[:,"raised_by"].apply(self.extract_domain)
@@ -44,6 +51,10 @@ class Combiner:
 
         return samples 
 
+    """
+    This function creates domain mappings for customers. Since a customer can have multiple domains,
+    the function takes the domain of the email addresses that is most common.
+    """
     def create_domain_mappings(self, contacts):
 
         #Extract customer's domain from email_ids
@@ -73,6 +84,9 @@ class Combiner:
         self.domain_by_customer = domain_by_customer
         self.customer_by_domain = customer_by_domain
 
+    """
+    Once the domain mappings are created this can be used to add the domain for given email addresses in samples
+    """
     def samples_map_domains(self, samples):
         samples = samples.copy()
 
@@ -87,6 +101,9 @@ class Combiner:
         
         return samples
 
+    """
+    This routine can be called once combiner is loaded and is the standard routine for feature generation for samples and training data likewise.
+    """
     def process_samples(self, samples):
         #Adding everything to the sample
         print("Shape of samples before processing: " + str(samples.shape))
@@ -97,6 +114,9 @@ class Combiner:
 
         return samples
 
+    """
+    This method initializes the combiner
+    """
     def set_assignments(self, issues, todos, contacts):
         
         assignments = pd.merge(todos.add_prefix("todo_"),issues, left_on="todo_reference_name", right_on="name", how="left")       
@@ -108,7 +128,9 @@ class Combiner:
         employees = assignments["todo_owner"].unique()
         self.todo_owners = employees[~pd.isnull(employees)].tolist() #Removes nans
     
-
+    """
+    This is the second method to call when initializing the combiner
+    """
     def set_timesheets(self, timesheets, employees, projects, customers):
 
         #Add customer from the issues

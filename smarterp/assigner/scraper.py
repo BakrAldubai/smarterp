@@ -18,6 +18,10 @@ class Scraper:
         
         self.url = None
 
+    """
+    Authentication to ERPNext at the Baseurl given to the scrape function.
+    If username and password are not passed, the function will use console input.
+    """
     def auth(self,username,password):
         #Input Adminpassword
         if(password == None):
@@ -37,6 +41,9 @@ class Scraper:
         
         return s
     
+    """
+    Scrapes all the required doctypes
+    """
     def scrape(self,username, password, baseurl):
         self.url = baseurl
         self.session = self.auth(username, password)
@@ -104,6 +111,9 @@ class Scraper:
 
         return todos
 
+    """
+    Deprecated function.
+    """
     def assign(self,issues, todos):
         assigned = []
         for todo in todos:
