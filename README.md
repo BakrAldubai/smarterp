@@ -1,4 +1,4 @@
-# Smarterp (frappe app)
+# Smarterp
 This repository is under development. The aim is to improve usability of the ERPNext (and Frappe) Open Source
 enterprise resource planning web platform (https://github.com/frappe/erpnext). I started working on this during the corona crisis and am looking forward
 to add additional functionality as by request from others or by my own terms. The main focus of additional features
@@ -8,7 +8,7 @@ The packages that are installed with this frappe app as per requirement are skle
 
 ## Content
 ### Included:
-- Auto Assignment of Todo's for the Issues (Module: Support of ERPNext)
+- Assignment Assistant for the Issues (Module: Support of ERPNext)
 
 ### Roadmap:
 - Add task scheduler
@@ -16,10 +16,6 @@ The packages that are installed with this frappe app as per requirement are skle
 - Adding NLP to the Auto Assignment
 - Finding similar documents for certain doctypes
 ...
-
-### Suggestions:
-
-## Dependencies
 
 ### Auto Assignemnt
 The model is trained with the existing data. You should have at least ~ 100 issues in your erp.
