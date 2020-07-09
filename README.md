@@ -23,9 +23,9 @@ The packages that are installed with this frappe app as per requirement are skle
 - Finding similar documents for certain doctypes
 ...
 
-### Auto Assignemnt
-The model is trained with the existing data. You should have at least ~ 100 issues in your erp.
-Based on doctypes:
+### Assignemnt Assitant
+The model, that predicts the percentages is trained with existing data in your ERPNext Installation. You should have at least ~ 100 issues in your erp.
+It is based on the doctypes:
 - Todos
 - Issues
 - Timesheets
@@ -34,9 +34,11 @@ Based on doctypes:
 - Employees
 - Contacts
 
-All of these should contain documents already. The more the better. If your testing or development environment does not support
+If you need to exclude certain doctypes because you don't use them, feel free to contact me. We can include a selection of doctypes in the settings of the app.
+
+All of the doctypes should contain content in your installation. The more the better. If your testing or development environment does not support
 live data, you can in the settings use the login information for a production environment. It will pull data from there in a one-way fashion. It will not delete, modify or otherwise compromise the production environment. Please also check with your data privacy. The data will be downloaded as tables onto the system where you install the app. It will be located under /sites/sitename/assigner
-You can always delte this folder and all data is removed.
+You can always delete this folder and all data is removed.
 
 ## Installation
 
