@@ -6,7 +6,13 @@ is based on dashboarding, data analysis and machine learning algorithms.
 
 The packages that are installed with this frappe app as per requirement are sklearn, pandas and numpy. If you want to install the app, try it out, have requests of what feature could come in hand or want to collaborate please feel free to contact me.
 
+
 ## Content
+
+### Screenshots
+
+![alt text](https://github.com/canlann/smarterp/blob/master/readme-assignment-screenshot.png)
+
 ### Included:
 - Assignment Assistant for the Issues (Module: Support of ERPNext)
 
