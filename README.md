@@ -59,7 +59,8 @@ Just as any other frappe app:
 4. Enter the Administrator username of your ERPNext instance (use a production instance, it will pull data from there (one-way) )
 5. Enter the Administrator password (use production instance)
 6. Enter the base url of your site (without trailing slash / use production instance)
-7. Click "Train Assigner" 
+7. Save the document
+8. Click "Train Assigner" 
 (Takes about 10 minutes, Reload the page and the Last Trained field will be set after training has finished)
 
 8. For better performance the training should be done once a day or every second day (Task scheduler to automate it is under way).
