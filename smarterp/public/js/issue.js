@@ -90,7 +90,7 @@ frappe.ui.form.on('Issue', {
 						},
 						title: {
 							display: true,
-							text: "Diese Anfrage kann wahrscheinlich bearbeitet werden von:"
+							text: "This issue can likely be assigned to (percentage):"
 						}
 					}
 					var barChart = new Chart(wrapper.find('#chart_dom')[0].getContext("2d"), {
@@ -100,17 +100,17 @@ frappe.ui.form.on('Issue', {
 							datasets: [
 								{
 									label: sorted[0]["name"].split("@")[0],
-									data: [sorted[0]["probability"].toFixed(2)],
+									data: [sorted[0]["probability"].toFixed(2)*100],
 									backgroundColor: ['rgba(106, 150, 125,0.8)']
 								},
 								{
 									label: sorted[1]["name"].split("@")[0],
-									data: [sorted[1]["probability"].toFixed(2)],
+									data: [sorted[1]["probability"].toFixed(2)*100],
 									backgroundColor: ['rgba(215, 180, 50,0.8)']
 								},
 								{
 									label: sorted[2]["name"].split("@")[0],
-									data: [sorted[2]["probability"].toFixed(2)],
+									data: [sorted[2]["probability"].toFixed(2)*100],
 									backgroundColor: ['rgba(217, 105, 65,0.8)']
 								}
 							]
