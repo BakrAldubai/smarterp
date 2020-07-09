@@ -17,8 +17,9 @@ The packages that are installed with this frappe app as per requirement are skle
 - Assignment Assistant for the Issues (Module: Support of ERPNext)
 
 ### Roadmap:
+- Add option to make assignment automatically without user interaction
 - Add task scheduler
-- Loadbalancing for the Auto Assignment based on the open ToDo's of people
+- Visualized Loadbalancing for the Auto Assignment based on the open ToDo's of people
 - Adding NLP to the Auto Assignment
 - Finding similar documents for certain doctypes
 ...
