@@ -23,7 +23,7 @@ The packages that are installed with this frappe app as per requirement are skle
 - Finding similar documents for certain doctypes
 ...
 
-### Assignemnt Assitant
+### Assignemnt Assistant
 The model, that predicts the percentages is trained with existing data in your ERPNext Installation. You should have at least ~ 100 issues in your erp.
 It is based on the doctypes:
 - Todos
