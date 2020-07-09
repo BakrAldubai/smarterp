@@ -48,7 +48,7 @@ Just as any other frappe app:
 <code>
   bench get-app [this_repo_link]  
   
-  bench install-app smarterp [site-name]
+  bench --site [site-name] install-app smarterp
 </code>
 
 ## Configuration
