@@ -18,7 +18,6 @@ The packages that are installed with this frappe app as per requirement are skle
 
 ### Roadmap:
 - Add option to make assignment automatically without user interaction
-- Add task scheduler
 - Visualized Loadbalancing for the Auto Assignment based on the open ToDo's of people
 - Adding NLP to the Auto Assignment
 - Finding similar documents for certain doctypes
@@ -62,8 +61,7 @@ Just as any other frappe app:
 7. Save the document
 8. Click "Train Assigner" 
 (Takes about 10 minutes, Reload the page and the Last Trained field will be set after training has finished)
-
-8. For better performance the training should be done once a day or every second day (Task scheduler to automate it is under way).
+9. For better performance the Assigner is trained every day around 5 a.m. automatically
 
 ![alt text](https://github.com/canlann/smarterp/blob/master/readme-settings.png)
 
